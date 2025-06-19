@@ -1,2 +1,2 @@
-# p-ppb1-aktifitas2
+# Aktifitas 2 & Latihan
 MapBox
