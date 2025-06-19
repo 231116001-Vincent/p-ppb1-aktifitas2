@@ -1,14 +1,19 @@
 package com.vharya.mapassignment
 
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.bumptech.glide.Glide
 import com.mapbox.geojson.Point
 import com.mapbox.maps.CameraOptions
 import com.mapbox.maps.MapView
+import com.mapbox.maps.plugin.annotation.annotations
+import com.mapbox.maps.plugin.annotation.generated.PointAnnotationOptions
+import com.mapbox.maps.plugin.annotation.generated.createPointAnnotationManager
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +43,17 @@ class MainActivity : AppCompatActivity() {
                 .bearing(0.0)
                 .build()
         )
+
+        val annotationApi = mapView.annotations
+        val mapMarker = BitmapFactory.decodeResource(resources, R.drawable.red_marker)
+
+        val pointAnnotationManager = annotationApi.createPointAnnotationManager()
+        val pointAnnotationOptions: PointAnnotationOptions = PointAnnotationOptions()
+            .withPoint(Point.fromLngLat(112.60734, -7.96586))
+            .withIconImage(mapMarker)
+            .withIconSize(0.4)
+
+        pointAnnotationManager.create(pointAnnotationOptions)
 
         mainLayout.addView(mapView)
     }
