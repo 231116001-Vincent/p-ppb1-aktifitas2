@@ -10,7 +10,9 @@ import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
 import com.mapbox.geojson.Point
 import com.mapbox.maps.CameraOptions
+import com.mapbox.maps.MapInitOptions
 import com.mapbox.maps.MapView
+import com.mapbox.maps.Style
 import com.mapbox.maps.plugin.annotation.annotations
 import com.mapbox.maps.plugin.annotation.generated.PointAnnotationOptions
 import com.mapbox.maps.plugin.annotation.generated.createPointAnnotationManager
@@ -34,7 +36,10 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        val mapView = MapView(this)
+        val mapView = MapView(this, MapInitOptions(
+            this,
+            styleUri = Style.SATELLITE,
+        ))
         mapView.mapboxMap.setCamera(
             CameraOptions.Builder()
                 .center(Point.fromLngLat(113.9, 0.789))
